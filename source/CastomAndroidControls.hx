@@ -54,16 +54,15 @@ class CastomAndroidControls extends MusicBeatState
 		bg.color = FlxColor.fromRGB(255,0,0);
 		add(bg);
 
-		checker = new FlxSprite().loadGraphic(Paths.image('androidcontrols/menu/Checker'));
+		checker = new FlxBackdrop(Paths.image('androidcontrols/menu/Checker'), 0.2, 0.2, true, true);
 		checker.scrollFactor.set(0, 0.07);
-		crochet.color = FlxColor.fromRGB(255,0,0);
+		checker.color = FlxColor.fromRGB(255,0,0);
 		add(checker);
 
-	    var exitbutton = new FlxButton(FlxG.width - 150, 50, "Exit", function()
-	    {
+    	var exitbutton = new FlxButton(FlxG.width - 150, 50, "Exit", function()
+    	{
 			FlxG.switchState(new OptionsDirect());    	
 		});
-		exitbutton.setLabelFormat("VCR OSD Mono",40,FlxColor.BLACK,"center");
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
 		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
@@ -73,7 +72,6 @@ class CastomAndroidControls extends MusicBeatState
 			save();
 			FlxG.switchState(new OptionsDirect());
 		});
-		savebutton.setLabelFormat("VCR OSD Mono",40,FlxColor.BLACK,"center");
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
 		savebutton.color = FlxColor.fromRGB(255,0,0);
 		add(savebutton);
