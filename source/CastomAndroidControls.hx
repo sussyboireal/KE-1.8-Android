@@ -51,15 +51,15 @@ class CastomAndroidControls extends MusicBeatState
 		curSelected = config.getcontrolmode();
 
 		bg = new FlxSprite().loadGraphic(Paths.image('androidcontrols/menu/menuBG'));
-		bg.color = FlxColor.fromRGB(255,0,0);
+		bg.color = FlxColor.fromRGB(0,255,0);
 		add(bg);
 
 		checker = new FlxBackdrop(Paths.image('androidcontrols/menu/Checker'), 0.2, 0.2, true, true);
 		checker.scrollFactor.set(0, 0.07);
-		checker.color = FlxColor.fromRGB(255,0,0);
+		checker.color = FlxColor.fromRGB(0,175,0);
 		add(checker);
 
-    	var exitbutton = new FlxButton(FlxG.width - 150, 50, "Exit", function()
+    	var exitbutton = new FlxButton(FlxG.width - 125, 50, "Exit", function()
     	{
 			FlxG.switchState(new OptionsDirect());    	
 		});
@@ -293,6 +293,7 @@ class CastomAndroidControls extends MusicBeatState
 	function updatethefuckingpozitions() {
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
+		inputvari.screenCenter(X);
 	}
 
 	override function destroy()
