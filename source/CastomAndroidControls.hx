@@ -30,7 +30,7 @@ class CastomAndroidControls extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
-	var controlitems:Array<String> = ['hitbox','right control','left control','custom','keyboard'];
+	var controlitems:Array<String> = ['right control','left control','keyboard','custom','hitbox'];
 
 	var curSelected:Int = 0;
 
