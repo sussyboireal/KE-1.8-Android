@@ -235,6 +235,7 @@ class OptionsMenu extends MusicBeatSubstate
 		selectedOption = selectedCat.options[0];
 
                 addVirtualPad(FULL, A_B);
+                addPadCamera();
 
 		super.create();
 	}
