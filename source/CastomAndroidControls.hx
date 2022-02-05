@@ -59,15 +59,15 @@ class CastomAndroidControls extends MusicBeatState
 		checker.color = FlxColor.fromRGB(0,175,0);
 		add(checker);
 
-    	var exitbutton = new FlxButton(FlxG.width - 125, 50, "Exit", function()
-    	{
+    	        var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
+    	        {
 			FlxG.switchState(new OptionsDirect());    	
 		});
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
 		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
 
-		var savebutton = new FlxButton(exitbutton.x, exitbutton.y + 50, "Save And Exit", function()
+		var savebutton = new FlxButton(exitbutton.x, exitbutton.y + 100, "Save And Exit", function()
 		{
 			save();
 			FlxG.switchState(new OptionsDirect());
