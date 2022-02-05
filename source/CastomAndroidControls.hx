@@ -1,17 +1,17 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.util.FlxColor;
+import flixel.util.FlxSave;
+import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
-import flixel.addons.ui.FlxUIButton;
 import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import ui.FlxVirtualPad;
-import flixel.util.FlxSave;
-import flixel.math.FlxPoint;
 import haxe.Json;
 import ui.Hitbox;
 import ui.AndroidControls.Config;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
@@ -30,15 +30,18 @@ class CastomAndroidControls extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
-	var controlitems:Array<String> = ['right control','left control','keyboard','custom','hitbox'];
+	var controlitems:Array<String> = ['hitbox','right control','left control','custom','keyboard'];
 
 	var curSelected:Int = 0;
 
 	var buttonistouched:Bool = false;
 
-	var bindbutton:flixel.ui.FlxButton;
+	var bindbutton:FlxButton;
 
 	var config:Config;
+
+	var bg:FlxSprite;
+	var checker:FlxBackdrop;
 
 	override public function create():Void
 	{
@@ -47,19 +50,32 @@ class CastomAndroidControls extends MusicBeatState
 		config = new Config();
 		curSelected = config.getcontrolmode();
 
-	    var exitbutton = new FlxUIButton(FlxG.width - 650, 50,"Exit", () -> {
-			FlxG.switchState(new OptionsDirect());	    	
-	    });
-		exitbutton.resize(125,50);
-		exitbutton.setLabelFormat("VCR OSD Mono",24,FlxColor.BLACK,"center");
+		bg = new FlxSprite().loadGraphic(Paths.image('androidcontrols/menu/menuBG'));
+		bg.color = FlxColor.fromRGB(255,0,0);
+		add(bg);
+
+		checker = new FlxSprite().loadGraphic(Paths.image('androidcontrols/menu/Checker'));
+		checker.scrollFactor.set(0, 0.07);
+		crochet.color = FlxColor.fromRGB(255,0,0);
+		add(checker);
+
+	    var exitbutton = new FlxButton(FlxG.width - 150, 50, "Exit", function()
+	    {
+			FlxG.switchState(new OptionsDirect());    	
+		});
+		exitbutton.setLabelFormat("VCR OSD Mono",40,FlxColor.BLACK,"center");
+		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
+		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
 
-		var savebutton = new FlxUIButton((exitbutton.x + exitbutton.width + 25), 50,"Save And Exit",() -> {
+		var savebutton = new FlxButton(exitbutton.x, exitbutton.y + 50, "Save And Exit", function()
+		{
 			save();
 			FlxG.switchState(new OptionsDirect());
 		});
-		savebutton.resize(250,50);
-		savebutton.setLabelFormat("VCR OSD Mono",24,FlxColor.BLACK,"center");
+		savebutton.setLabelFormat("VCR OSD Mono",40,FlxColor.BLACK,"center");
+		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
+		savebutton.color = FlxColor.fromRGB(255,0,0);
 		add(savebutton);
 
 		_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
@@ -70,7 +86,8 @@ class CastomAndroidControls extends MusicBeatState
 		_hb.visible = false;
 		add(_hb);
 
-		inputvari = new FlxText(125, 50, 0, controlitems[0], 48);
+		inputvari = new FlxText(0, 50, 0, controlitems[0], 48);
+		inputvari.screenCenter(X);
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
@@ -107,6 +124,11 @@ class CastomAndroidControls extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		checker.x -= -0.27;
+		checker.y -= 0.63;
+
+		updatethefuckingpozitions();
 		
 		for (touch in FlxG.touches.list){
 			arrowanimate(touch);
@@ -250,7 +272,7 @@ class CastomAndroidControls extends MusicBeatState
 		config.setcontrolmode(curSelected);
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-                if (daChoice == 'custom'){
+    	if (daChoice == 'custom'){
 			savecustom();
 		}
 	}
@@ -268,6 +290,11 @@ class CastomAndroidControls extends MusicBeatState
 				button.setGraphicSize(260);
 				button.updateHitbox();
 		}
+	}
+
+	function updatethefuckingpozitions() {
+		leftArrow.x = inputvari.x - 60;
+		rightArrow.x = inputvari.x + inputvari.width + 10;
 	}
 
 	override function destroy()
