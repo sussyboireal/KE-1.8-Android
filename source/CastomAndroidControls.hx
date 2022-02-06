@@ -64,6 +64,7 @@ class CastomAndroidControls extends MusicBeatState
 			FlxG.switchState(new OptionsDirect());    	
 		});
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
+                exitbutton.label.setFormat(null, 32);
 		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
 
@@ -73,7 +74,8 @@ class CastomAndroidControls extends MusicBeatState
 			FlxG.switchState(new OptionsDirect());
 		});
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
-		savebutton.color = FlxColor.fromRGB(255,0,0);
+                savebutton.label.setFormat(null, 32);
+		savebutton.color = FlxColor.fromRGB(0,255,0);
 		add(savebutton);
 
 		_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
