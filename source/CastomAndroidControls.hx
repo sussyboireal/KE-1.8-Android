@@ -86,7 +86,7 @@ class CastomAndroidControls extends MusicBeatState
 		_hb.visible = false;
 		add(_hb);
 
-		inputvari = new FlxText(0, 50, 0, controlitems[0], 48);
+		inputvari = new FlxText(0, 50, 0, controlitems[curSelected], 48);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
