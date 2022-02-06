@@ -74,7 +74,7 @@ class CastomAndroidControls extends MusicBeatState
 			FlxG.switchState(new OptionsDirect());
 		});
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
-                savebutton.label.setFormat(null, 32);
+                savebutton.label.setFormat(null, 24);
 		savebutton.color = FlxColor.fromRGB(0,255,0);
 		add(savebutton);
 
