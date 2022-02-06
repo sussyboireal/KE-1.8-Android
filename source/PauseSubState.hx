@@ -196,14 +196,14 @@ class PauseSubState extends MusicBeatSubstate
 			                if (PlayState.instance.useVideo)
 			                {
 				                GlobalVideo.get().stop();
-				                PlayState.instance.remove(videoSprite);
+				                PlayState.instance.remove(PlayState.videoSprite);
 				                PlayState.instance.removedVideo = true;
 			                }
 
 			                FlxG.switchState(new WaveformTestState());
 			                PlayState.stageTesting = false;
 			                #if FEATURE_LUAMODCHART
-			                if (luaModchart != null)
+			                if (PlayState.luaModchart != null)
 			                {
 				                PlayState.luaModchart.die();
 				                PlayState.luaModchart = null;
