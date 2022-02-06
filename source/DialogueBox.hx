@@ -187,7 +187,20 @@ class DialogueBox extends FlxSpriteGroup
 			startDialogue();
 			dialogueStarted = true;
 		}
-		if (PlayerSettings.player1.controls.BACK && isEnding != true)
+
+                var pressedEnter:Bool = PlayerSettings.player1.controls.ACCEPT;
+
+		#if mobile
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				pressedEnter = true;
+			}
+		}
+		#end
+
+		if (PlayerSettings.player1.controls.BACK#if android || FlxG.android.justReleased.BACK #end && isEnding != true)
 		{
 			remove(dialogue);
 			isEnding = true;
@@ -216,7 +229,7 @@ class DialogueBox extends FlxSpriteGroup
 				kill();
 			});
 		}
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		if (pressedEnter && dialogueStarted == true)
 		{
 			remove(dialogue);
 
