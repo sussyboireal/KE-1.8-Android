@@ -24,7 +24,7 @@ class PauseSubState extends MusicBeatSubstate
 	public static var goToOptions:Bool = false;
 	public static var goBack:Bool = false;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Options', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Options', "Waveform Test", 'Exit to menu'];
 	var curSelected:Int = 0;
 
 	public static var playingPause:Bool = false;
@@ -191,6 +191,24 @@ class PauseSubState extends MusicBeatSubstate
 				case "Options":
 					goToOptions = true;
 					close();
+                                case "Waveform Test":
+                                        PlayState.songMultiplier = 1;
+			                if (PlayState.instance.useVideo)
+			                {
+				                GlobalVideo.get().stop();
+				                PlayState.instance.remove(videoSprite);
+				                PlayState.instance.removedVideo = true;
+			                }
+
+			                FlxG.switchState(new WaveformTestState());
+			                PlayState.stageTesting = false;
+			                #if FEATURE_LUAMODCHART
+			                if (luaModchart != null)
+			                {
+				                PlayState.luaModchart.die();
+				                PlayState.luaModchart = null;
+			                }
+			                #end
 				case "Exit to menu":
 					PlayState.startTime = 0;
 					if (PlayState.instance.useVideo)
