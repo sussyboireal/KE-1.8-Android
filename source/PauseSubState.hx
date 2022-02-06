@@ -196,7 +196,7 @@ class PauseSubState extends MusicBeatSubstate
 			                if (PlayState.instance.useVideo)
 			                {
 				                GlobalVideo.get().stop();
-				                PlayState.instance.remove(PlayState.videoSprite);
+				                PlayState.instance.remove(PlayState.instance.videoSprite);
 				                PlayState.instance.removedVideo = true;
 			                }
 
